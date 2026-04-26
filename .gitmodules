@@ -1,0 +1,6 @@
+[submodule "Wikipedia/slob"]
+	path = Wikipedia/slob
+	url = https://github.com/ttsiodras/slob
+[submodule "Wikipedia/slobby"]
+	path = Wikipedia/slobby
+	url = https://github.com/ttsiodras/slobby
