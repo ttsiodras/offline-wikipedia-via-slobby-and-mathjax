@@ -16,12 +16,12 @@ Then download a .slob file with the data you want. I use the Wikipedia one, from
 [https://ftp.halifax.rwth-aachen.de/aarddict/enwiki/enwiki20260401-slob/](https://ftp.halifax.rwth-aachen.de/aarddict/enwiki/enwiki20260401-slob/)
 
 There's a release per month, so choose what you want. There's also many other datasets you can choose from - see 
-[https://ftp.halifax.rwth-aachen.de/aarddict/](https://ftp.halifax.rwth-aachen.de/aarddict/)
+[https://ftp.halifax.rwth-aachen.de/aarddict/](https://ftp.halifax.rwth-aachen.de/aarddict/) The enwiki ones
+contain the entirety of the text content in the English Wikipedia; and my Mathjax filter makes sure
+that the pages auto-render all mathematical notation.
 
-The enwiki ones contain the entirety of the text content in the English Wikipedia. Due to my 
-Mathjax filter, it also auto-renders all mathematical notation. Put the file in the same 
-place as I did (`/opt/aard.wikipedia/enwiki-20260401.slob`) or update the `SLOBBY_FILE` in the 
-Makefile.
+Put the file in the same place as I did (`/opt/aard.wikipedia/enwiki-20260401.slob`) or update the `SLOBBY_FILE`
+in the Makefile.
 
 Usage can't get any simpler:
 
