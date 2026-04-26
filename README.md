@@ -1,12 +1,8 @@
-This is a proxy for [slobby](https://github.com/itkach/slobby); it extracts the math definitions from the "alt" field of non-inline math images, and uses Mathjax to render them.
+# What is this?
 
-Before, with just slobby:
+Without any internet access, you get to have this:
 
-![Before, with just slobby](images/before.png "Before, with just slobby")
-
-After, over this mathjax_proxy.py:
-
-![After, over this mathjax_proxy.py](images/after.png "After, over this mathjax_proxy.py")
+![Offline wikipedia, with math](images/after.png "Offline wikipedia, with math")
 
 # Installation
 
@@ -38,5 +34,20 @@ You can then visit [http://localhost:8014](http://localhost:8014) to access the 
 Note that the docker image is "only" 247MB, which I suppose is an achievement these days; keep in mind
 that the `enwiki-20260401.slob` file is 24GB, so we're only adding 1% extra :-)
 
+# Notes
+
 Hope this helps someone! It's a Wikipedia that will still function, even when you don't have any
 Internet connectivity - giving you what matters the most: the text, and the math.
+
+The bulk of the work was done by the slob/slobby guys. All I did was add a proxy in front,
+that extracts the math definitions from the "alt" field of non-inline math images,
+and uses Mathjax to render them.
+
+Before, with just slobby:
+
+![Before, with just slobby](images/before.png "Before, with just slobby")
+
+After, over this mathjax_proxy.py:
+
+![After, over this mathjax_proxy.py](images/after.png "After, over this mathjax_proxy.py")
+
