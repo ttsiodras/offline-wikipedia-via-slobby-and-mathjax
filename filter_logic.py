@@ -54,7 +54,7 @@ def process_math_elements(html_content: str) -> str:
     Process HTML content to replace BLOCK math elements with MathJax-compatible spans.
     Inline math is LEFT UNTOUCHED as it already renders correctly with the
     original server's MathJax configuration.
-    
+
     Uses BeautifulSoup for reliable parsing regardless of whitespace/formatting.
     """
     soup = BeautifulSoup(html_content, 'html.parser')
@@ -91,7 +91,7 @@ def process_math_elements(html_content: str) -> str:
         # So we change the class to trigger MathJax processing, then use CSS for block display
         span['class'] = ['mwe-math-element', 'mwe-math-element-inline']
         span['style'] = 'display: block; text-align: center; margin: 1em 0;'
-        
+
         # Find or create the inner span with mwe-math-mathml-display
         inner_span = span.find('span', class_='mwe-math-mathml-display')
         if not inner_span:
@@ -106,24 +106,24 @@ def process_math_elements(html_content: str) -> str:
             for child in list(span.children):
                 if child != inner_span and not (child.name == 'img'):
                     child.decompose()
-        
+
         # Update style - make it inline (not block)
         inner_span['style'] = ''
-        
+
         # Find or create the <math> tag
         math_tag = inner_span.find('math')
         if not math_tag:
             math_tag = soup.new_tag('math')
             inner_span.insert(0, math_tag)
-        
+
         # Set the alttext attribute (MediaWiki.js uses this to render)
         math_tag['alttext'] = formula
-        
+
         # IMPORTANT: Do NOT set text content - MediaWiki.js reads alttext and renders
         # If we leave text content, it shows both the raw LaTeX AND the rendered math
         # Just clear any existing text
         math_tag.string = ''
-        
+
         # Update the <img> to match inline format
         img_tag = span.find('img')
         if not img_tag:
@@ -140,22 +140,10 @@ def process_math_elements(html_content: str) -> str:
     return str(soup)
 
 
-def add_mathjax_script(html_content: str) -> str:
-    """Add MathJax script to the HTML if not already present.
-    
-    NOTE: The original server already has MathJax loaded with MediaWiki.js.
-    We skip adding additional scripts to avoid conflicts.
-    The converted math elements use 'mwe-math-element-inline' class which
-    MediaWiki.js already processes.
-    """
-    # Always return unchanged - the original server's MathJax handles rendering
-    return html_content
-
-
 def process_html_response(html_content: str) -> str:
-    """Process HTML content to enable MathJax rendering."""
-    # Replace block math images with MathJax spans (inline math left untouched)
-    html_content = process_math_elements(html_content)
-    # Add MathJax script
-    html_content = add_mathjax_script(html_content)
-    return html_content
+    """Process HTML content to enable MathJax rendering.
+
+    NOTE: The original server already has MathJax loaded with MediaWiki.js,
+    so we only need to convert block math elements to inline format.
+    """
+    return process_math_elements(html_content)
